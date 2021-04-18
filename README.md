@@ -1,5 +1,5 @@
 # sudoku-solvers
-Sudoku solvers in multiple languages
+> Sudoku solvers using a recursive algorithm in multiple languages.
 * C
 * C++
 * C#
