@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <tuple>
+#include <chrono>
 
 using namespace std;
 
@@ -34,7 +35,7 @@ class Array {
 	//C# style array methods
 public:
 	static bool IndexOf(int arr[], int num) {
-		for (int i = 0; i < sizeof(arr); i++) {
+		for (int i = 0; i < 9; i++) {
 			if (arr[i] == num) {
 				return true;
 			}
@@ -89,8 +90,8 @@ bool CheckValid(int arr[][9], int row, int col, int num) {
 }
 
 tuple<int, int> FindEmpty(int arr[][9]) {
-	for (int row = 0; row < sizeof(arr); row++) {
-		for (int col = 0; col < sizeof(arr); col++){
+	for (int row = 0; row < 9; row++) {
+		for (int col = 0; col < 9; col++){
 			if (arr[row][col] == 0) {
 				return make_tuple(row, col);
 			}
@@ -106,7 +107,7 @@ bool Solver(int arr[][9]) {
 	if (get<0>(cord) == -1) {
 		return true;
 	}
-	for (int i = 0; i < sizeof(replaceNum); i++) {
+	for (int i = 0; i < 9; i++) {
 		if (CheckValid(arr, get<0>(cord), get<1>(cord), replaceNum[i])) {
 			arr[get<0>(cord)][get<1>(cord)] = replaceNum[i];
 			if (Solver(arr)) {
@@ -121,6 +122,7 @@ bool Solver(int arr[][9]) {
 
 int main()
 {
+	auto startTime = chrono::steady_clock::now();
 	int boardArray[9][9] = {
 		 { 5,3,0, 0,7,0, 0,0,0 }
 		,{ 6,0,0, 1,9,5, 0,0,0 }
@@ -137,4 +139,9 @@ int main()
 	DrawBoard(boardArray);
 	Solver(boardArray);
 	DrawBoard(boardArray);
+	auto endTime = chrono::steady_clock::now();
+	
+	cout << "Solve Time -> " << chrono::duration_cast<chrono::seconds>(endTime - startTime).count()
+		<< "s:" << chrono::duration_cast<chrono::milliseconds>(endTime - startTime).count()
+		<< "m:" << chrono::duration_cast<chrono::microseconds>(endTime - startTime).count() << "us";
 }
