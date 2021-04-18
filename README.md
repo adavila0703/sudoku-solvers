@@ -1,2 +1,7 @@
 # sudoku-solvers
- Solvers in multiple lang's
+Sudoku solvers in multiple languages
+* C
+* C++
+* C#
+* JavaScript 
+* Python
